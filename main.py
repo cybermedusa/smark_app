@@ -38,10 +38,10 @@ avg_age_f_m = round(users_df.groupby(['gender'])['age'].mean(),2)
 # print(users_df['gender'].unique())
 # plt.bar(users_df['gender'].unique(), gender_count, color='maroon', width=0.4)
 # plt.show()
-x_axs = ['female', 'male']
-plt.bar(x_axs, gender_count, color='maroon', width=0.4)
-functions.add_labels(x_axs, gender_count)
-plt.show()
+# x_axs = ['female', 'male']
+# plt.bar(x_axs, gender_count, color='maroon', width=0.4)
+# functions.add_labels(x_axs, gender_count)
+# plt.show()
 
 # how many users have subscription?
 subscription_users = pd.read_sql("select * from subscription_payments", con=db_connection)
@@ -62,22 +62,34 @@ count_subs_types = subscription_users.groupby(['subscription_type_id'])['id'].co
     # for row in rs:
     #     print(row)
 
-# with db_connection.connect() as con:
-#     results = con.execute('select users.gender from users where users.id in (select subscription_payments.user_id from subscription_payments where subscription_payments.subscription_type_id=1)')
-#     res_list = []
-#
-#     for i in results:
-#         res_list.append(i[0])
+with db_connection.connect() as con:
 
-# print(res_list)
-# print(res_list.count("M"))
-# print(res_list.count("F"))
-# people who have monthly subscription are 83 Males 63 Females
+    all_res = []
+
+    for i in range(1,4):
+        results = con.execute('select users.gender from users where users.id in (select subscription_payments.user_id from subscription_payments where subscription_payments.subscription_type_id='+str(i)+')')
+        all_res.append(results)
+
+    r1 = []
+    r2 = []
+    r3 = []
+    r = []
+
+    for result in all_res:
+        r.append(result)
+
+    functions.append_results_to_lists(r[0], r1)
+    functions.append_results_to_lists(r[1], r2)
+    functions.append_results_to_lists(r[2], r3)
+
+    functions.print_sub_output(r1, "monthly")
+    functions.print_sub_output(r2, "half-year")
+    functions.print_sub_output(r3, "yearly")
 
 # with db_connection.connect() as con:
-#     results = con.execute('select count(user_id), subscription_type_id from subscription_payments group by subscription_type_id')
+#     # results = con.execute('select count(user_id), subscription_type_id from subscription_payments group by subscription_type_id')
+#     results = con.execute("")
 #
 #     for i in results:
 #         print(i)
 
-'select count(users.gender, subscription_type_id from )'
