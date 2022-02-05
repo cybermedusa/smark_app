@@ -28,3 +28,12 @@ def return_nest_sub_list(l1, l2, l3):
     m3 = x3[1][1]
     f_m_lst = list([[f1,m1],[f2,m2],[f3,m3]])
     return f_m_lst
+
+def count_total_emp_costs(salary_list):
+    emp_total_cost_lst = []
+    for i in salary_list:
+        total_cost = round(i+i*0.0976+i*0.065+i*0.0167+i*0.0245+i*0.001)
+        emp_total_cost_lst.append(total_cost)
+    return emp_total_cost_lst
+
+
