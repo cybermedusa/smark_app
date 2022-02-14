@@ -1,9 +1,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import math
 
 def add_labels_on_chart(x,y):
     for i in range(len(x)):
-        plt.text(i, y[i], y[i], fontsize=6, ha='center')
+        plt.text(i, y[i], y[i], fontsize=8, ha='center', fontweight='bold', fontstyle='oblique')
 
 def append_results_to_lists(list_with_results, empty_list):
     for i in list_with_results:
@@ -36,4 +37,41 @@ def count_total_emp_costs(salary_list):
         emp_total_cost_lst.append(total_cost)
     return emp_total_cost_lst
 
+def return_avg_min_max_all_types(df):
+    avg_all_usr_parking_time = round(df['minutes'].mean(), 2)
+    max_all_usr_parking_time = round(df['minutes'].max(), 2)
+    min_all_usr_parking_time = round(df['minutes'].min(), 2)
+    return f"avg: {avg_all_usr_parking_time}\nmax: {max_all_usr_parking_time}\nmin: {min_all_usr_parking_time}"
 
+def return_avg_min_max_sub(df):
+    avg_sub_usr_parking_time = round(df['minutes'].mean(), 2)
+    max_sub_usr_parking_time = round(df['minutes'].max(), 2)
+    min_sub_usr_parking_time = round(df['minutes'].min(), 2)
+    return f"avg: {avg_sub_usr_parking_time}\nmax: {max_sub_usr_parking_time}\nmin: {min_sub_usr_parking_time}"
+
+def return_avg_min_max_non_sub(df):
+    avg_non_sub_usr_parking_time = round(df['minutes'].mean(), 2)
+    max_non_sub_usr_parking_time = round(df['minutes'].max(), 2)
+    min_non_sub_usr_parking_time = round(df['minutes'].min(), 2)
+    return f"avg: {avg_non_sub_usr_parking_time}\nmax: {max_non_sub_usr_parking_time}\nmin: {min_non_sub_usr_parking_time}"
+
+def return_avg_min_max_non_sub_payment(df):
+    grouped_avg = round(df.groupby('city_district_id')['total_parking_cost_per_user'].mean(), 2)
+    grouped_max = round(df.groupby('city_district_id')['total_parking_cost_per_user'].max(), 2)
+    grouped_min = round(df.groupby('city_district_id')['total_parking_cost_per_user'].min(), 2)
+    # avg_non_sub_usr_parking_payment = round(df['total_parking_cost_per_user'].mean(), 2)
+    # max_non_sub_usr_parking_payment = round(df['total_parking_cost_per_user'].max(), 2)
+    # min_non_sub_usr_parking_payment = round(df['total_parking_cost_per_user'].min(), 2)
+    # return f"avg: {avg_non_sub_usr_parking_payment}\nmax: {max_non_sub_usr_parking_payment}\nmin: {min_non_sub_usr_parking_payment}"
+    return grouped_avg, grouped_max, grouped_min
+
+def count_distance(list_of_tuples):
+    results = []
+    for i in list_of_tuples:
+        distance = round((i[1] - i[0]), 2)
+        results.append(distance)
+    return results
+
+def merge_lists(list1, list2):
+    merged_list = [(list1[i], list2[i]) for i in range(0, len(list1))]
+    return merged_list
