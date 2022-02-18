@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import math
 
 def add_labels_on_chart(x,y):
     for i in range(len(x)):
@@ -31,11 +30,11 @@ def return_nest_sub_list(l1, l2, l3):
     return f_m_lst
 
 def count_total_emp_costs(salary_list):
-    emp_total_cost_lst = []
+    emp_total_cost_list = []
     for i in salary_list:
         total_cost = round(i+i*0.0976+i*0.065+i*0.0167+i*0.0245+i*0.001)
-        emp_total_cost_lst.append(total_cost)
-    return emp_total_cost_lst
+        emp_total_cost_list.append(total_cost)
+    return emp_total_cost_list
 
 def return_avg_min_max_all_types(df):
     avg_all_usr_parking_time = round(df['minutes'].mean(), 2)
@@ -59,10 +58,6 @@ def return_avg_min_max_non_sub_payment(df):
     grouped_avg = round(df.groupby('city_district_id')['total_parking_cost_per_user'].mean(), 2)
     grouped_max = round(df.groupby('city_district_id')['total_parking_cost_per_user'].max(), 2)
     grouped_min = round(df.groupby('city_district_id')['total_parking_cost_per_user'].min(), 2)
-    # avg_non_sub_usr_parking_payment = round(df['total_parking_cost_per_user'].mean(), 2)
-    # max_non_sub_usr_parking_payment = round(df['total_parking_cost_per_user'].max(), 2)
-    # min_non_sub_usr_parking_payment = round(df['total_parking_cost_per_user'].min(), 2)
-    # return f"avg: {avg_non_sub_usr_parking_payment}\nmax: {max_non_sub_usr_parking_payment}\nmin: {min_non_sub_usr_parking_payment}"
     return grouped_avg, grouped_max, grouped_min
 
 def count_distance(list_of_tuples):

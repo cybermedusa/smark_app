@@ -2,10 +2,10 @@ import turtle
 import pandas as pd
 from smark_app import db_connection
 
-# avg app rate
+# Average application rate
 rate_df = pd.read_sql('select * from rates', con=db_connection)
 avg_rate = round(rate_df['value'].mean(), 2)
-print(avg_rate)
+# print(avg_rate)
 
 turtle_obj = turtle.Turtle()
 turtle_obj.color('red')
@@ -17,8 +17,6 @@ def curve():
         turtle_obj.forward(1)
 
 def heart():
-    # turtle_obj.fillcolor('red')
-    # turtle_obj.begin_fill()
     turtle_obj.left(140)
     turtle_obj.forward(113)
     curve()
