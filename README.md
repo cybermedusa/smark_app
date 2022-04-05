@@ -10,4 +10,4 @@ Techonolgies included in project:
   - matplotlib,
   - numpy,
 - Excel
-## Installation
+
